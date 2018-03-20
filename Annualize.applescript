@@ -1,4 +1,4 @@
-----------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------
 -- Script
 --          Annualize 
 --
@@ -11,7 +11,7 @@
 --
 -- Date
 --          November 04, 2012 
-----------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------
 
 -- Get the current year
 set currentYear to year of (get current date)
@@ -23,15 +23,11 @@ tell application "Microsoft Outlook"
 	set theFolder to selected folder
 	set folderName to name of theFolder
 	
-	-- Get the "On My Computer" Folder
-	set onMyComputer to on my computer
-	
-	-- Get all the sub folders in the "On My Computer" folder
-	set subFolders to name of folders of onMyComputer
+	-- Get all the sub folders in the "Inbox" folder
+	set subfldrs to name of folders of inbox
 	
 	-- Get a list of all categories
 	set categoryList to name of categories
-	
 	
 	-- Get all the selected messages, timeout if not possible in 5 minutes
 	with timeout of 300 seconds
@@ -53,9 +49,9 @@ tell application "Microsoft Outlook"
 			-- Create a new subfolder with the year
 			-- Do this only if the folder does not already exist
 			set subFolderName to "Y" & theYear
-			if subFolderName is not in subFolders then
-				make new mail folder at onMyComputer with properties {name:subFolderName}
-				copy subFolderName to end of subFolders
+			if subFolderName is not in subfldrs then
+				make new mail folder at inbox with properties {name:subFolderName}
+				copy subFolderName to end of subfldrs
 			end if
 			
 			-- Using the folder name, create a category, if one does not already exist
@@ -68,7 +64,7 @@ tell application "Microsoft Outlook"
 			set category of aMessage to {category folderName}
 			
 			-- Move the message to the annualized folder
-			move aMessage to folder subFolderName of onMyComputer
+			move aMessage to folder subFolderName of inbox
 		end if
 	end repeat
 end tell
