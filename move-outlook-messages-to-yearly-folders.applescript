@@ -1,6 +1,6 @@
 ------------------------------------------------------------
 -- Script
---          Annualize 
+--          move-outlook-messages-to-yearly-folders 
 --
 -- Description 
 --          Move selected messaged into a folder by Year
